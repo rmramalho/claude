@@ -1,0 +1,12 @@
+--index-url https://<username>:<password>@jfrog-artifactory.metlife.com/artifactory/api/pypi/pypi-virtual/simple
+
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-dotenv>=1.0
+langchain>=0.3
+langchain-metiq
+langgraph>=0.2
+httpx>=0.27
+pydantic>=2.9
+PyJWT>=2.9
+cryptography>=42

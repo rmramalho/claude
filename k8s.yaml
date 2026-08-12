@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agente-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: agente-app
+  template:
+    metadata:
+      labels:
+        app: agente-app
+    spec:
+      # Descomente se o registry (ex: JFrog) exigir autenticação para pull:
+      # imagePullSecrets:
+      #   - name: registry-cred
+      containers:
+        - name: agente-app
+          image: <SEU_REGISTRY>/agente-app:v1
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: agente-secrets
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: agente-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: agente-app
+  ports:
+    - port: 80
+      targetPort: 8000
