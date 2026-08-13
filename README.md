@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Agente com roteamento de tools (LangChain + LangGraph + MetIQ + FastAPI + AKS)
 
 ## O que o app faz
@@ -204,3 +205,4 @@ curl -X POST http://localhost:8000/ask -H "Content-Type: application/json" -d '{
 ```
 
 Se preferir usar Docker, veja as instruções acima na seção de container.
+>>>>>>> claude/main
