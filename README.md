@@ -181,3 +181,26 @@ curl -X POST http://<EXTERNAL-IP>/ask \
   — ajuste conforme o contrato real da API.
 - Nunca coloque segredos (`OPENAI_API_KEY`, client secret, etc.) direto no
   `k8s.yaml` ou em código — sempre via `Secret` do Kubernetes.
+
+## Quickstart (Windows PowerShell)
+
+Resumo rápido para desenvolver e testar localmente no Windows:
+
+```powershell
+# criar virtualenv e instalar dependências
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+# copiar exemplo de env e editar
+copy .env.example .env
+# editar .env com suas credenciais (não commitar)
+
+# rodar a aplicação
+uvicorn main:app --reload
+
+# testar endpoint
+curl -X POST http://localhost:8000/ask -H "Content-Type: application/json" -d '{"pergunta":"me manda uma foto de cachorro"}'
+```
+
+Se preferir usar Docker, veja as instruções acima na seção de container.
